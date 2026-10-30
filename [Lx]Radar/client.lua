@@ -843,6 +843,7 @@ local function openMap(state)
     refreshBlips()
   end
   mapOpen = state
+  setElementData(localPlayer, "Lx.radar.map", state, false)       -- read by [Lx]HUD (it hides while the big map is open)
   M.drag, M.rdown, uiCapture, wasOverUI = nil, nil, false, false
   if state then
     paused = false
@@ -1169,6 +1170,7 @@ end)
 
 addEventHandler("onClientResourceStop", resourceRoot, function()
   if mapOpen then showCursor(false); lockControls(false) end
+  setElementData(localPlayer, "Lx.radar.map", false, false)
   setPlayerHudComponentVisible("radar", true)
   setPlayerHudComponentVisible("area_name", true)
 end)
