@@ -12,7 +12,7 @@ local SETTINGS_FILE  = "settings.txt"
 local REMEMBER_FILE  = "remember.txt"
 local KEY_FILE       = "remember.key"
 local VERSION_FILE   = "assets.ver"
-local ASSET_VERSION  = "3"        -- bump this number every time you change a file in ui/ : every player re-downloads them once
+local ASSET_VERSION  = "4"        -- bump this number every time you change a file in ui/ : every player re-downloads them once
 
 -- Every file listed here MUST have download="false" in meta.xml (they are fetched with downloadFile).
 local FILES = {
@@ -365,6 +365,22 @@ local function openUI()
   startDownloads()
 end
 
+-- Give GTA's HUD back WITHOUT undoing what [Lx]HUD / [Lx]Radar manage: the old setPlayerHudComponentVisible("all", true)
+-- made GTA's own radar + area name (and money / health ...) flash on the screen for a moment after every login.
+local function running(name)
+  local r = getResourceFromName(name)
+  return r and getResourceState(r) == "running" or false
+end
+local function restoreHud()
+  for _, c in ipairs({ "breath", "vehicle_name", "radio", "crosshair" }) do setPlayerHudComponentVisible(c, true) end
+  if not running("[Lx]HUD") then
+    for _, c in ipairs({ "health", "armour", "money", "clock", "wanted", "weapon", "ammo" }) do setPlayerHudComponentVisible(c, true) end
+  end
+  if not running("[Lx]Radar") then
+    setPlayerHudComponentVisible("radar", true); setPlayerHudComponentVisible("area_name", true)
+  end
+end
+
 local function closeUI(instant)
   stopMusic(instant)
   if isTimer(askTimer) then killTimer(askTimer) end
@@ -377,7 +393,7 @@ local function closeUI(instant)
   showCursor(false)
   clearChatBox()
   showChat(true)
-  setPlayerHudComponentVisible("all", true)
+  restoreHud()
 end
 
 addEventHandler("onClientResourceStart", resourceRoot, openUI)
