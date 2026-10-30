@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="pre ui-off"><head><meta charset="utf-8"><title>LINUX Game - Account</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="flow.css"></head><body>
+<!-- ========== INTRO (pre-rendered invisibly, starts when flow.js adds .run) ========== -->
+<div class="stage" id="intro">
+ <div class="in-h in-t"></div><div class="in-h in-b"></div>
+ <div class="in-glow"></div><div class="in-line"></div>
+ <div class="in-center">
+  <img class="in-logo" src="logo.png" alt="">
+  <svg class="in-word" viewBox="0 0 354 90">
+   <polygon pathLength="1" points="1,1 14,1 14,44 53,44 53,57 1,57"/>
+   <polygon pathLength="1" points="81,1 94,1 94,57 81,57"/>
+   <polygon pathLength="1" points="121,57 121,1 137,1 164,40 164,1 177,1 177,57 161,57 134,18 134,57"/>
+   <polygon pathLength="1" points="207,1 220,1 220,44 250,44 250,1 263,1 263,57 207,57"/>
+   <polygon pathLength="1" points="293,1 309,1 322,21 335,1 351,1 330,29 351,57 335,57 322,37 309,57 293,57 314,29"/>
+   <text x="1" y="88" fill="#fff" font-size="16" letter-spacing="38">GAME</text>
+  </svg>
+  <div class="in-tag">MORE THAN A SERVER</div>
+ </div>
+ <div class="in-skip">PRESS ANY KEY TO SKIP</div>
+ <div class="in-bar"><i></i></div>
+</div>
+
+<!-- Background image: replace bg.jpg -->
+<div class="bg"></div>
+
+<!-- ========== SIDEBAR TABS (add / remove tabs here: data-tab must match a pane id below) ========== -->
+<nav class="side">
+ <div class="tab on" data-tab="login"><svg viewBox="0 0 24 24"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M10 8l4 4-4 4M14 12H3"/></svg><span>Login</span></div>
+ <div class="tab" data-tab="register"><svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="4"/><path d="M2.5 20c.6-3.6 3.6-5.5 7.5-5.5M18 14v6M15 17h6"/></svg><span>Create Account</span></div>
+ <div class="tab" data-tab="change"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="12" height="10" rx="2"/><path d="M7 10V7a3 3 0 0 1 5.6-1.5M20 4v4h-4M20 8a6 6 0 0 0-3.5-3"/></svg><span>Change Password</span></div>
+ <div class="tab" data-tab="recover"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12.5l2 2 4-4.5"/></svg><span>Account Recovery</span></div>
+ <div class="tab" data-tab="reset"><svg viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3M14 9l2 2"/></svg><span>Forgot Password</span></div>
+ <!-- Logo + version (size: --logo-w in style.css) -->
+ <!-- Dock: music, Discord, Telegram (links are set in script.js > CONFIG.links) -->
+ <div class="dock">
+  <div class="music" id="musicBox" data-lv="2">
+   <div class="dbtn" id="musicBtn" role="button" aria-label="Music on/off (M)" aria-pressed="true">
+    <svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w1" d="M15.500 9.500a4 4 0 0 1 0 5"/><path class="w2" d="M18.500 7a8 8 0 0 1 0 10"/><path class="x" d="M16 9.500l5 5M21 9.500l-5 5"/></svg>
+    <i class="eq"><b></b><b></b><b></b></i>
+   </div>
+   <div class="mpanel"><div class="mbox"><input id="vol" type="range" min="0" max="100" step="1" value="30" aria-label="Music volume"><em id="volPct">30%</em></div></div>
+  </div>
+  <div class="dbtn brand-discord" data-link="discord"><svg class="fill" viewBox="0 0 24 24"><path d="M19.300 5.400A16.600 16.600 0 0 0 15.200 4.100l-.5 1a15.300 15.300 0 0 0-4.600 0l-.5-1A16.600 16.600 0 0 0 5.500 5.400C2.900 9.300 2.200 13.100 2.500 16.800a16.800 16.800 0 0 0 5.100 2.600l1.100-1.800a11 11 0 0 1-1.700-.8l.4-.3a12 12 0 0 0 10.200 0l.4.3c-.5.300-1.100.6-1.700.8l1.100 1.800a16.800 16.800 0 0 0 5.100-2.600c.4-4.300-.7-8.100-3.100-11.400zM9.100 14.500c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2zm5.800 0c-1 0-1.800-.9-1.800-2s.8-2 1.800-2 1.800.9 1.800 2-.8 2-1.800 2z"/></svg><span>Discord</span></div>
+  <div class="dbtn brand-telegram" data-link="telegram"><svg class="fill" viewBox="0 0 24 24"><path d="M21.500 4.200L2.800 11.400c-.9.400-.9 1.100-.2 1.300l4.800 1.500 1.800 5.600c.2.600.4.800.9.800s.7-.2 1-.5l2.300-2.300 4.800 3.500c.9.500 1.500.2 1.700-.8l3-14.400c.3-1.200-.5-1.800-1.400-1.400zM8.900 13.600l9.300-5.900c.4-.3.800-.1.500.2l-7.800 7z"/></svg><span>Telegram</span></div>
+  <div class="dbtn brand-instagram" data-link="instagram"><svg viewBox="0 0 24 24"><rect x="3.500" y="3.500" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.200" cy="6.800" r=".7" fill="currentColor"/></svg><span>Instagram</span></div>
+  <div class="dbtn brand-teamspeak" data-link="teamspeak"><svg viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6.500" rx="1.500"/><rect x="17" y="14" width="4" height="6.500" rx="1.500"/></svg><span>TeamSpeak</span></div>
+ </div>
+ <div class="logo"><img src="logo.png" alt=""><small>v1.0</small></div>
+</nav>
+
+<main>
+ <!-- ========== BRAND (wordmark is SVG, font = --font-title) ========== -->
+ <div class="tagline">MORE THAN A SERVER</div>
+ <svg class="wordmark" viewBox="0 0 354 90" fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round">
+  <!-- Letters: filled shapes. Stroke thickness = 13 (make it thinner/thicker by moving the points).
+       stroke-width above = corner softness (0 = sharp, 4 = very round). -->
+  <polygon points="1,1 14,1 14,44 53,44 53,57 1,57"/>
+  <polygon points="81,1 94,1 94,57 81,57"/>
+  <polygon points="121,57 121,1 137,1 164,40 164,1 177,1 177,57 161,57 134,18 134,57"/>
+  <polygon points="207,1 220,1 220,44 250,44 250,1 263,1 263,57 207,57"/>
+  <polygon points="293,1 309,1 322,21 335,1 351,1 330,29 351,57 335,57 322,37 309,57 293,57 314,29"/>
+  <text x="1" y="88" stroke="none" font-weight="400" font-size="16" letter-spacing="38">GAME</text>
+ </svg>
+ <div class="underline"></div>
+
+ <!-- ========== LOGIN ========== -->
+ <section class="pane on" id="login">
+  <div class="pane-title">Welcome back</div>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg><input id="l_user" maxlength="20" type="text" placeholder="Username" autocomplete="off"></label>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><input id="l_pass" maxlength="30" type="password" placeholder="Password" autocomplete="off"><span class="caps" id="caps">CAPS</span><svg class="eye" viewBox="0 0 24 24" data-eye><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></label>
+  <div class="row"><div class="check" id="remember"><s></s>Remember me</div><span class="link" id="forgotUser">Forgot Username?</span></div>
+  <button class="btn" data-action="login">Login</button>
+ </section>
+
+ <!-- ========== CREATE ACCOUNT ========== -->
+ <section class="pane" id="register">
+  <div class="pane-title">Create Account</div>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg><input id="r_user" maxlength="20" type="text" placeholder="Username" autocomplete="off"></label>
+  <div class="mini" id="uStatus"></div>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><input id="r_phone" type="text" inputmode="tel" maxlength="20" placeholder="Phone Number" autocomplete="off"></label>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><input id="r_pass" maxlength="30" type="password" placeholder="Password" autocomplete="off"><svg class="eye" viewBox="0 0 24 24" data-eye><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></label>
+  <div class="rules" id="pwRules"><span data-r="len">6+ chars</span><span data-r="case">Aa</span><span data-r="num">123</span><span data-r="sym">#@!</span></div>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><input id="r_conf" maxlength="30" type="password" placeholder="Confirm Password" autocomplete="off"></label>
+  <div class="check" id="acceptRules"><s></s>I accept the server rules</div>
+  <div class="hint">Your number is verified in our <b>Telegram bot</b>.<br>One account per PC &amp; per phone.</div>
+  <button class="btn" data-action="register">Create Account</button>
+ </section>
+
+ <!-- ========== CHANGE PASSWORD ========== -->
+ <section class="pane" id="change">
+  <div class="pane-title">Change Password</div>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg><input id="c_user" maxlength="20" type="text" placeholder="Username" autocomplete="off"></label>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><input id="c_old" maxlength="30" type="password" placeholder="Current Password" autocomplete="off"></label>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><path d="M21 2l-9.5 9.5M15 6l3 3M12.5 11.5a4.5 4.5 0 1 1-6.4 6.4 4.5 4.5 0 0 1 6.4-6.4z"/></svg><input id="c_new" maxlength="30" type="password" placeholder="New Password" autocomplete="off"></label>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><path d="M21 2l-9.5 9.5M15 6l3 3M12.5 11.5a4.5 4.5 0 1 1-6.4 6.4 4.5 4.5 0 0 1 6.4-6.4z"/></svg><input id="c_conf" maxlength="30" type="password" placeholder="Confirm New Password" autocomplete="off"></label>
+  <button class="btn" data-action="change">Update Password</button>
+ </section>
+
+ <!-- ========== ACCOUNT RECOVERY (serial change) ========== -->
+ <section class="pane" id="recover">
+  <div class="pane-title">Account Recovery</div>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg><input id="s_user" maxlength="20" type="text" placeholder="Username" autocomplete="off"></label>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><input id="s_pass" maxlength="30" type="password" placeholder="Password" autocomplete="off"></label>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10v4M10 10v4M13 10v4M17 10v4"/></svg><input id="s_serial" type="text" placeholder="Serial" autocomplete="off" readonly></label>
+  <label class="field" id="codeField" hidden><svg class="ico" viewBox="0 0 24 24"><path d="M21 3L3 10.500l6 2.500 2.500 6L21 3zM9 13l5-4"/></svg><input id="s_code" type="text" inputmode="numeric" placeholder="6-digit Telegram code" maxlength="6" autocomplete="off"></label>
+  <div class="hint">Playing from a new PC? A code is sent to your <b>Telegram bot</b>, then the account is linked to the <b>serial above</b>.</div>
+  <button class="btn" data-action="recover">Recover Account</button>
+ </section>
+ <!-- ========== FORGOT PASSWORD (code through the linked Telegram bot) ========== -->
+ <section class="pane" id="reset">
+  <div class="pane-title">Reset Password</div>
+  <label class="field"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg><input id="f_user" maxlength="20" type="text" placeholder="Username" autocomplete="off"></label>
+  <div id="resetBox" hidden>
+   <label class="field"><svg class="ico" viewBox="0 0 24 24"><path d="M21 3L3 10.500l6 2.500 2.500 6L21 3zM9 13l5-4"/></svg><input id="f_code" type="text" inputmode="numeric" maxlength="6" placeholder="6-digit Telegram code" autocomplete="off"></label>
+   <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><input id="f_pass" maxlength="30" type="password" placeholder="New Password" autocomplete="off"><svg class="eye" viewBox="0 0 24 24" data-eye><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></label>
+   <label class="field"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><input id="f_conf" maxlength="30" type="password" placeholder="Confirm New Password" autocomplete="off"></label>
+   <div class="row" style="justify-content:center"><span class="link" id="f_resend">Resend code</span></div>
+  </div>
+  <div class="hint">A 6-digit code is sent to the <b>Telegram bot</b> linked to your account.<br>Then choose a new password.</div>
+  <button class="btn" data-action="reset">Send Code</button>
+ </section>
+</main>
+
+<!-- ========== ONLINE PLAYERS (top right) - Lua: lg.setPlayers(count) ========== -->
+<div class="online" id="online">
+ <i class="dot"></i>
+ <div><b id="onlineCount">--</b><span>ONLINE</span></div>
+</div>
+
+<!-- ========== ANNOUNCEMENTS (Lua: lg.setAnnouncements([...])) ========== -->
+<aside class="news" id="news" hidden></aside>
+
+<!-- ========== TELEGRAM VERIFICATION (after "Create Account"; Lua: lg.verifyStart / verifyStep / verifyClose) ========== -->
+<div class="overlay" id="verify" hidden>
+ <div class="vcard">
+  <small>ONE LAST STEP</small>
+  <h2>Verify on Telegram</h2>
+  <div class="vbody">
+   <div class="qrbox"><canvas id="qr" width="184" height="184"></canvas></div>
+   <ol id="vsteps">
+    <li><i></i><div><b>Open the bot</b><span>Scan the QR code with your phone or paste the link in Telegram, then press <u>START</u>.</span></div></li>
+    <li><i></i><div><b>Join the channels</b><span>Join the required channels and press <u>I joined</u>.</span></div></li>
+    <li><i></i><div><b>Share your number</b><span>Use the button in the bot. It must match the number you entered.</span></div></li>
+   </ol>
+  </div>
+  <div class="vlink"><input id="vLink" type="text" readonly><button class="vbtn" id="vCopy" type="button">Copy</button></div>
+  <div class="vfoot"><span id="vTimer"></span><button class="vbtn ghost" id="vCancel" type="button">Cancel</button></div>
+ </div>
+</div>
+
+<!-- ========== PROFILE WIZARD (after registration / at login if missing; Lua: lg.profileStart / profileError / profileDone / refStatus) ========== -->
+<div class="overlay" id="profile" hidden>
+ <div class="pcard">
+  <div class="phead"><small id="pHello">WELCOME</small><h2>Complete your profile</h2></div>
+  <ol id="pTabs"><li class="active">About you</li><li>Body</li><li>Community</li></ol>
+
+  <!-- 1) real name, birth date, gender -->
+  <section class="pp on" data-p="0">
+   <div class="pl">Full name</div>
+   <label class="field" id="f_name"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.8-4 4-6 8-6s7.2 2 8 6"/></svg><input id="p_name" type="text" maxlength="40" placeholder="Real full name" autocomplete="off"></label>
+   <div class="pl">Date of birth <span class="cal" id="pCal"><b data-c="g" class="on">Gregorian</b><b data-c="j">شمسی</b></span></div>
+   <div class="dsel" id="f_birth"><div class="dd empty" id="dd_day" data-k="d" tabindex="0" role="button" aria-label="Day"><span class="ddv">Day</span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg><div class="ddl"></div></div><div class="dd empty" id="dd_mon" data-k="m" tabindex="0" role="button" aria-label="Month"><span class="ddv">Month</span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg><div class="ddl"></div></div><div class="dd empty" id="dd_year" data-k="y" tabindex="0" role="button" aria-label="Year"><span class="ddv">Year</span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg><div class="ddl"></div></div></div>
+   <div class="pl">Gender</div>
+   <div class="seg" id="f_gender">
+    <button type="button" data-v="male"><svg viewBox="0 0 24 24"><circle cx="10" cy="14" r="5"/><path d="M14 10l6-6M15 4h5v5"/></svg>Male</button>
+    <button type="button" data-v="female"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M12 14v8M9 19h6"/></svg>Female</button>
+    <button type="button" data-v="other"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>Other</button>
+   </div>
+  </section>
+
+  <!-- 2) height, weight -->
+  <section class="pp" data-p="1">
+   <div class="pl">Height</div>
+   <div class="step"><button type="button" class="sb" data-t="p_height" data-d="-1" aria-label="Less">&minus;</button>
+    <label class="field" id="f_height"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4"/></svg><input id="p_height" type="text" inputmode="numeric" maxlength="3" placeholder="170" data-min="100" data-max="250" data-def="170" autocomplete="off"><em>CM</em></label>
+    <button type="button" class="sb" data-t="p_height" data-d="1" aria-label="More">+</button></div>
+   <div class="pl">Weight</div>
+   <div class="step"><button type="button" class="sb" data-t="p_weight" data-d="-1" aria-label="Less">&minus;</button>
+    <label class="field" id="f_weight"><svg class="ico" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 10a4 4 0 0 1 8 0M12 10l2.500-2.500"/></svg><input id="p_weight" type="text" inputmode="numeric" maxlength="3" placeholder="70" data-min="30" data-max="300" data-def="70" autocomplete="off"><em>KG</em></label>
+    <button type="button" class="sb" data-t="p_weight" data-d="1" aria-label="More">+</button></div>
+   <div class="hint">Tip: hold <b>+</b> or <b>&minus;</b> to change faster.<br>Your profile details are visible to staff only.</div>
+  </section>
+
+  <!-- 3) referral code, how you found us -->
+  <section class="pp" data-p="2">
+   <div class="pl">Referral code <i>optional</i></div>
+   <label class="field" id="f_ref"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M12 9v12M3 13h18M12 9c-2-5-7-4-5 0M12 9c2-5 7-4 5 0"/></svg><input id="p_ref" type="text" maxlength="6" placeholder="ABC123" autocomplete="off"></label>
+   <div class="mini" id="refStatus"></div>
+   <div class="pl">How did you find us?</div>
+   <div class="chips" id="f_source">
+    <button type="button" data-v="discord">Discord</button><button type="button" data-v="telegram">Telegram</button><button type="button" data-v="instagram">Instagram</button>
+    <button type="button" data-v="youtube">YouTube</button><button type="button" data-v="tiktok">TikTok</button><button type="button" data-v="google">Google</button>
+    <button type="button" data-v="friend">A friend</button><button type="button" data-v="other">Other</button>
+   </div>
+   <label class="field" id="f_other" hidden><input id="p_other" type="text" maxlength="30" placeholder="Where? (optional)" autocomplete="off"></label>
+  </section>
+
+  <!-- done -->
+  <section class="pp" data-p="3">
+   <div class="pdone">
+    <div class="bigok"><svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></div>
+    <h3>You are all set!</h3>
+    <div class="pl" style="margin:0">Your referral code</div>
+    <div class="rcode"><b id="pCode">------</b><button type="button" class="vbtn ghost" id="pCopy">Copy</button></div>
+    <div class="hint">Friends who enter this code when they register are linked to you.</div>
+    <button type="button" class="pbtn pgo" id="pGo">Continue</button>
+   </div>
+  </section>
+
+  <div class="perr" id="pErr"></div>
+  <div class="pnav"><button type="button" class="vbtn ghost" id="pBack">Back</button><button type="button" class="pbtn" id="pNext">Next</button></div>
+ </div>
+</div>
+
+<!-- ========== WELCOME (after login) ========== -->
+<div class="overlay" id="welcome" hidden><div class="ov-card"><small>WELCOME BACK</small><h2 id="wName">Player</h2><div class="loadbar"><i></i></div></div></div>
+
+<!-- ========== MAINTENANCE / BANNED (Lua: lg.setState("maintenance"|"banned", {...})) ========== -->
+<div class="overlay" id="blocked" hidden><div class="ov-card"><div class="bicon" id="bIcon"></div><h2 id="bTitle"></h2><p id="bText"></p><em id="bExtra"></em></div></div>
+
+
+<div class="footer"><span></span>BUILT BY PLAYERS &nbsp;/&nbsp; FOR PLAYERS</div>
+
+<div id="toasts"></div>
+<script src="qrcode.js"></script>
+<script src="script.js"></script>
+<script src="flow.js"></script>
+</body></html>
