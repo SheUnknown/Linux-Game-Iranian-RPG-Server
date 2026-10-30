@@ -1,0 +1,94 @@
+<meta>
+    <info author="LINUX Game" name="[Lx]Radar" version="1.0.0" type="script" description="Minimap + F11 map with custom blips (blips/01-63, up, down, square), waypoint and a live customizer"/>
+    <min_mta_version client="1.6.0" server="1.5.8"/>
+
+    <script src="server.lua" type="server"/>
+    <script src="client.lua" type="client"/>
+
+    <file src="map.jpg"/>
+    <file src="arrow.png"/>
+    <file src="pin.png"/>
+    <file src="cone.png"/>
+    <file src="dot.png"/>
+    <file src="ring.png"/>
+    <file src="vignette.png"/>
+    <file src="map.html"/>
+    <file src="map.css"/>
+    <file src="map.js"/>
+    <file src="fonts/title.ttf"/>
+    <file src="fonts/body.ttf"/>
+    <file src="fonts/title.woff2"/>
+    <file src="fonts/body.woff2"/>
+
+    <file src="blips/01.png"/>
+    <file src="blips/02.png"/>
+    <file src="blips/03.png"/>
+    <file src="blips/04.png"/>
+    <file src="blips/05.png"/>
+    <file src="blips/06.png"/>
+    <file src="blips/07.png"/>
+    <file src="blips/08.png"/>
+    <file src="blips/09.png"/>
+    <file src="blips/10.png"/>
+    <file src="blips/11.png"/>
+    <file src="blips/12.png"/>
+    <file src="blips/13.png"/>
+    <file src="blips/14.png"/>
+    <file src="blips/15.png"/>
+    <file src="blips/16.png"/>
+    <file src="blips/17.png"/>
+    <file src="blips/18.png"/>
+    <file src="blips/19.png"/>
+    <file src="blips/20.png"/>
+    <file src="blips/21.png"/>
+    <file src="blips/22.png"/>
+    <file src="blips/23.png"/>
+    <file src="blips/24.png"/>
+    <file src="blips/25.png"/>
+    <file src="blips/26.png"/>
+    <file src="blips/27.png"/>
+    <file src="blips/28.png"/>
+    <file src="blips/29.png"/>
+    <file src="blips/30.png"/>
+    <file src="blips/31.png"/>
+    <file src="blips/32.png"/>
+    <file src="blips/33.png"/>
+    <file src="blips/34.png"/>
+    <file src="blips/35.png"/>
+    <file src="blips/36.png"/>
+    <file src="blips/37.png"/>
+    <file src="blips/38.png"/>
+    <file src="blips/39.png"/>
+    <file src="blips/40.png"/>
+    <file src="blips/41.png"/>
+    <file src="blips/42.png"/>
+    <file src="blips/43.png"/>
+    <file src="blips/44.png"/>
+    <file src="blips/45.png"/>
+    <file src="blips/46.png"/>
+    <file src="blips/47.png"/>
+    <file src="blips/48.png"/>
+    <file src="blips/49.png"/>
+    <file src="blips/50.png"/>
+    <file src="blips/51.png"/>
+    <file src="blips/52.png"/>
+    <file src="blips/53.png"/>
+    <file src="blips/54.png"/>
+    <file src="blips/55.png"/>
+    <file src="blips/56.png"/>
+    <file src="blips/57.png"/>
+    <file src="blips/58.png"/>
+    <file src="blips/59.png"/>
+    <file src="blips/60.png"/>
+    <file src="blips/61.png"/>
+    <file src="blips/62.png"/>
+    <file src="blips/63.png"/>
+    <file src="blips/up.png"/>
+    <file src="blips/down.png"/>
+    <file src="blips/square.png"/>
+
+    <export function="setRadarWaypoint" type="client"/>
+    <export function="clearRadarWaypoint" type="client"/>
+    <export function="setPlayerWaypoint" type="server"/>
+    <export function="clearPlayerWaypoint" type="server"/>
+</meta>
