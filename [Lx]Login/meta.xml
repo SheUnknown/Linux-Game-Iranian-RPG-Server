@@ -1,0 +1,30 @@
+<meta>
+    <info author="LINUX Game" name="LINUX Game - Account System" version="1.2.0" type="script" description="Welcome chat, silent download, intro, Login / Register / Recovery with CEF UI"/>
+    <min_mta_version client="1.6.0" server="1.5.8"/>
+
+    <script src="server.lua" type="server"/>
+    <script src="client.lua" type="client"/>
+
+    <file src="ui/logo.png"/>
+
+    <file src="ui/index.html" download="false"/>
+    <file src="ui/style.css" download="false"/>
+    <file src="ui/flow.css" download="false"/>
+    <file src="ui/script.js" download="false"/>
+    <file src="ui/flow.js" download="false"/>
+    <file src="ui/qrcode.js" download="false"/>
+    <file src="ui/bg.jpg" download="false"/>
+    <file src="ui/fonts/title.ttf" download="false"/>
+    <file src="ui/fonts/body.ttf" download="false"/>
+    <file src="music.mp3" download="false"/>
+
+    <aclrequest>
+        <right name="function.addAccount" access="true"/>
+        <right name="function.removeAccount" access="true"/>
+        <right name="function.setAccountPassword" access="true"/>
+        <right name="function.logIn" access="true"/>
+        <right name="function.logOut" access="true"/>
+        <right name="function.kickPlayer" access="true"/>
+        <right name="function.fetchRemote" access="true"/>
+    </aclrequest>
+</meta>
