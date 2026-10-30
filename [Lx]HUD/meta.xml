@@ -1,0 +1,17 @@
+<meta>
+    <info author="LINUX Game" name="[Lx]HUD" version="1.0.0" type="script" description="Custom HUD (top-right by default) with a live F6 customizer panel"/>
+    <min_mta_version client="1.6.0" server="1.5.8"/>
+
+    <script src="server.lua" type="server"/>
+    <script src="client.lua" type="client"/>
+
+    <file src="ui/index.html"/>
+    <file src="ui/style.css"/>
+    <file src="ui/script.js"/>
+    <file src="ui/logo.png"/>
+    <file src="ui/fonts/title.woff2"/>
+    <file src="ui/fonts/body.woff2"/>
+
+    <export function="getPlayerID" type="server"/>
+    <export function="getPlayerFromID" type="server"/>
+</meta>
