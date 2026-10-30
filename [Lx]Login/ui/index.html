@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" class="pre ui-off"><head><meta charset="utf-8"><title>LINUX Game - Account</title>
 <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="flow.css"></head><body>
-<!-- ========== INTRO (pre-rendered invisibly, starts when flow.js adds .run) ========== -->
-<div class="stage" id="intro">
+<!-- ========== INTRO (pre-rendered invisibly with animations paused; flow.js adds .run) ==========
+     Only transform + opacity are animated: everything runs on the GPU compositor, no repaint, no lag. -->
+<div class="stage" id="intro" aria-hidden="true">
  <div class="in-h in-t"></div><div class="in-h in-b"></div>
- <div class="in-glow"></div><div class="in-line"></div>
+ <div class="in-glow"></div><div class="in-pulse"></div>
+ <div class="in-embers"><i style="--x:6%;--s:3px;--d:0.4s;--t:5.2s"></i><i style="--x:14%;--s:2px;--d:1.1s;--t:4.6s"></i><i style="--x:23%;--s:4px;--d:0.2s;--t:5.8s"></i><i style="--x:31%;--s:2px;--d:1.6s;--t:4.4s"></i><i style="--x:39%;--s:3px;--d:0.7s;--t:5.4s"></i><i style="--x:47%;--s:2px;--d:2.0s;--t:4.8s"></i><i style="--x:55%;--s:4px;--d:0.5s;--t:5.6s"></i><i style="--x:63%;--s:2px;--d:1.3s;--t:4.5s"></i><i style="--x:71%;--s:3px;--d:0.1s;--t:5.3s"></i><i style="--x:79%;--s:2px;--d:1.8s;--t:4.7s"></i><i style="--x:86%;--s:4px;--d:0.9s;--t:5.9s"></i><i style="--x:93%;--s:2px;--d:0.3s;--t:4.9s"></i><i style="--x:18%;--s:3px;--d:2.2s;--t:5.0s"></i><i style="--x:68%;--s:3px;--d:2.4s;--t:5.1s"></i></div>
+ <div class="in-line"></div>
  <div class="in-center">
-  <img class="in-logo" src="logo.png" alt="">
-  <svg class="in-word" viewBox="0 0 354 90">
-   <polygon pathLength="1" points="1,1 14,1 14,44 53,44 53,57 1,57"/>
-   <polygon pathLength="1" points="81,1 94,1 94,57 81,57"/>
-   <polygon pathLength="1" points="121,57 121,1 137,1 164,40 164,1 177,1 177,57 161,57 134,18 134,57"/>
-   <polygon pathLength="1" points="207,1 220,1 220,44 250,44 250,1 263,1 263,57 207,57"/>
-   <polygon pathLength="1" points="293,1 309,1 322,21 335,1 351,1 330,29 351,57 335,57 322,37 309,57 293,57 314,29"/>
-   <text x="1" y="88" fill="#fff" font-size="16" letter-spacing="38">GAME</text>
-  </svg>
+  <div class="in-mark"><div class="in-ring"></div><img class="in-logo" src="logo.png" alt=""></div>
+  <div class="in-word">
+   <svg class="lt" viewBox="0 0 354 90"><polygon points="1,1 14,1 14,44 53,44 53,57 1,57"/></svg>
+   <svg class="lt" viewBox="0 0 354 90"><polygon points="81,1 94,1 94,57 81,57"/></svg>
+   <svg class="lt" viewBox="0 0 354 90"><polygon points="121,57 121,1 137,1 164,40 164,1 177,1 177,57 161,57 134,18 134,57"/></svg>
+   <svg class="lt" viewBox="0 0 354 90"><polygon points="207,1 220,1 220,44 250,44 250,1 263,1 263,57 207,57"/></svg>
+   <svg class="lt" viewBox="0 0 354 90"><polygon points="293,1 309,1 322,21 335,1 351,1 330,29 351,57 335,57 322,37 309,57 293,57 314,29"/></svg>
+   <svg class="lt lt-game" viewBox="0 0 354 90"><text x="1" y="88" fill="#fff" font-size="16" letter-spacing="38">GAME</text></svg>
+   <div class="in-sbox"><i class="in-shine"></i></div>
+  </div>
   <div class="in-tag">MORE THAN A SERVER</div>
  </div>
  <div class="in-skip">PRESS ANY KEY TO SKIP</div>
