@@ -540,10 +540,7 @@ window.lg = {
 };
 $("#l_user").focus();
 
-/* ---------- PERFORMANCE: automatic lite mode on very slow machines ---------- */
+/* ---------- PERFORMANCE ----------
+   CONFIG.lite = true forces the light mode. Otherwise flow.js measures the real FPS while the intro plays
+   and switches to light mode by itself on a weak PC (it can no longer misfire while the page preloads). */
 if (CONFIG.lite) document.documentElement.classList.add("lite");
-else if (typeof requestAnimationFrame === "function") requestAnimationFrame(t0 => {               // measure the real frame rate for 1.2 s; < 18 fps -> switch effects off
-  let n = 0;
-  const loop = t => { n++; if (t - t0 < 1200) requestAnimationFrame(loop); else if (n / ((t - t0) / 1000) < 18) document.documentElement.classList.add("lite"); };
-  requestAnimationFrame(loop);
-});
