@@ -1,0 +1,119 @@
+/* =====================================================================
+   LINUX Game - flow.css : invisible preload -> intro -> login reveal
+   (loaded after style.css). Only transform/opacity are animated.
+   ===================================================================== */
+
+/* while the page preloads it is transparent so the game chat (top-left) stays visible */
+html.pre,html.pre body{background:transparent}
+html.pre .bg{opacity:0}
+.stage{position:fixed;inset:0;z-index:40;display:grid;place-items:center}
+
+#resetBox{display:flex;flex-direction:column;gap:14px}
+
+/* ---------- INTRO ---------- */
+#intro{background:transparent;cursor:none}
+/* before it runs, the intro is already painted (1% opacity = invisible) but every animation is paused:
+   layers and tiles are ready, so the first frame of the real intro does not stutter */
+#intro:not(.run){opacity:.01;pointer-events:none}
+#intro:not(.run) *{animation-play-state:paused!important}
+#intro.gone{display:none}
+#intro.out{pointer-events:none}
+
+.in-h{position:absolute;left:0;right:0;height:50.2%;background:#050506;z-index:1;will-change:transform;transition:transform .95s cubic-bezier(.76,0,.18,1)}
+.in-t{top:0}.in-b{bottom:0}
+.in-glow{position:absolute;left:50%;top:50%;width:1000px;height:1000px;margin:-500px 0 0 -500px;z-index:1;background:radial-gradient(circle,#e4001e55,#e4001e00 60%);animation:glow 1.6s .6s backwards cubic-bezier(.2,.7,.2,1);will-change:transform,opacity}
+@keyframes glow{from{opacity:0;transform:scale(.5)}}
+.in-line{position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;z-index:3;background:linear-gradient(90deg,#0000,var(--red-glow) 30%,#fff 50%,var(--red-glow) 70%,#0000);box-shadow:0 0 18px var(--red);animation:line 1.3s .1s forwards cubic-bezier(.5,0,.2,1);will-change:transform,opacity}
+@keyframes line{0%{transform:scaleX(0);opacity:1}55%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.in-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:26px;will-change:transform,opacity;transition:opacity .45s,transform .8s cubic-bezier(.5,0,.2,1)}
+.in-logo{height:86px;filter:drop-shadow(0 0 18px #e4001e99);will-change:transform,opacity;animation:logoin 1.1s .8s backwards cubic-bezier(.2,.8,.2,1)}
+@keyframes logoin{from{opacity:0;transform:translateY(22px) scale(.7)}}
+.in-word{width:min(560px,70vw);overflow:visible}
+.in-word polygon{fill:#fff;stroke:#fff;stroke-width:2.5;stroke-linejoin:round;animation:draw 1.5s cubic-bezier(.4,0,.2,1) backwards}
+.in-word polygon:nth-of-type(1){animation-delay:1.1s}
+.in-word polygon:nth-of-type(2){animation-delay:1.22s}
+.in-word polygon:nth-of-type(3){animation-delay:1.34s}
+.in-word polygon:nth-of-type(4){animation-delay:1.46s}
+.in-word polygon:nth-of-type(5){animation-delay:1.58s}
+@keyframes draw{
+  from{stroke-dasharray:1;stroke-dashoffset:1;fill-opacity:0;stroke:var(--red-glow)}
+  60%{stroke-dasharray:1;stroke-dashoffset:0;fill-opacity:0;stroke:var(--red-glow)}
+  to{stroke-dasharray:1;stroke-dashoffset:0;fill-opacity:1;stroke:#fff}}
+.in-word text{font-family:var(--font-title);animation:fadeup .9s 2.5s backwards cubic-bezier(.2,.8,.2,1)}
+@keyframes fadeup{from{opacity:0;transform:translateY(8px)}}
+.in-tag{font:400 11px var(--font-title);letter-spacing:7px;color:#cfcfd4;animation:wipe 1s 2.9s backwards cubic-bezier(.2,.7,.2,1)}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0);opacity:0}to{clip-path:inset(0 0 0 0)}}
+.in-skip{position:absolute;bottom:34px;left:0;right:0;z-index:2;text-align:center;font-size:10px;letter-spacing:4px;color:#55565e;animation:fadeup .8s 1.4s backwards}
+
+/* thin progress line: shows how long the intro still lasts */
+.in-bar{position:absolute;left:0;right:0;bottom:0;height:2px;z-index:2;background:#ffffff0d}
+.in-bar i{display:block;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--red),var(--red-glow));box-shadow:0 0 10px var(--red);will-change:transform;animation:inbar 5.4s .2s linear forwards}
+@keyframes inbar{to{transform:scaleX(1)}}
+
+#intro.out .in-t{transform:translateY(-101%)}
+#intro.out .in-b{transform:translateY(101%)}
+#intro.out .in-center{opacity:0;transform:scale(1.14)}
+#intro.out .in-glow{opacity:0;transition:opacity .4s}
+#intro.out .in-skip,#intro.out .in-bar{opacity:0;transition:opacity .3s}
+#intro.out .in-line{animation:flash .7s both}
+@keyframes flash{from{transform:scaleX(1) scaleY(1);opacity:1}to{transform:scaleX(1) scaleY(7);opacity:0}}
+
+/* ---------- LOGIN REVEAL (everything slides in, staggered) ---------- */
+.side{transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+html.ui-off .side{transform:translateX(-100%)}
+html.ui-off main>*{opacity:0;transform:translateX(-28px)}
+html.ui-off .online{opacity:0;transform:translateY(-14px)}
+html.ui-off .news,html.ui-off .footer{opacity:0;transform:translateY(14px)}
+html.ui-in main>*,html.ui-in .online,html.ui-in .news,html.ui-in .footer{transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+html.ui-in main>:nth-child(1){transition-delay:.2s}
+html.ui-in main>:nth-child(2){transition-delay:.3s}
+html.ui-in main>:nth-child(3){transition-delay:.4s}
+html.ui-in main>:nth-child(n+4){transition-delay:.5s}
+html.ui-in .online{transition-delay:.7s}
+html.ui-in .news{transition-delay:.8s}
+html.ui-in .footer{transition-delay:.9s}
+html.reveal .bg{animation:bgin 2.6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes bgin{from{transform:scale(1.12) translateZ(0)}to{transform:translateZ(0)}}
+
+/* =====================================================================
+   LOGIN PANEL LIFE (small, localized animations only: no full-screen motion)
+   ===================================================================== */
+/* staggered entrance of the form every time a tab opens (class .enter is set by flow.js) */
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.pane.enter>*{animation:rise .6s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--base,0s) + var(--d,0s))}
+.pane.enter.first{--base:.6s}
+.pane.enter>:nth-child(1){--d:0s}.pane.enter>:nth-child(2){--d:.05s}.pane.enter>:nth-child(3){--d:.1s}
+.pane.enter>:nth-child(4){--d:.15s}.pane.enter>:nth-child(5){--d:.2s}.pane.enter>:nth-child(6){--d:.25s}
+.pane.enter>:nth-child(7){--d:.3s}.pane.enter>:nth-child(8){--d:.35s}.pane.enter>:nth-child(9){--d:.4s}
+.pane.enter>:nth-child(n+10){--d:.45s}
+
+/* fields: lift on hover/focus, accent bar grows from the middle, icon pops */
+.field:hover,.field:focus-within{transform:translateY(-1px)}
+.field:before{top:50%;bottom:50%;transition:top .3s cubic-bezier(.2,.8,.2,1),bottom .3s cubic-bezier(.2,.8,.2,1),opacity .2s}
+.field:focus-within:before{top:7px;bottom:7px}
+.field:focus-within .ico{transform:scale(1.15)}
+
+/* buttons: light sweep on hover, press feedback */
+.btn:before{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;background:linear-gradient(100deg,#fff0,#ffffff55,#fff0);transform:translateX(-130%) skewX(-18deg);pointer-events:none}
+.btn:not(:disabled):hover:before{animation:sweep .85s cubic-bezier(.4,0,.2,1)}
+@keyframes sweep{to{transform:translateX(480%) skewX(-18deg)}}
+.btn:not(:disabled):active{transform:scale(.98)}
+.btn:disabled:before{display:none}
+
+/* sidebar: icons react, active marker grows in */
+.tab svg{transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+.tab:hover svg{transform:scale(1.14)}
+.tab.on:before{animation:mark .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes mark{from{transform:scaleY(0)}}
+
+/* small details */
+.underline{transform-origin:left;animation:ul 3.2s ease-in-out infinite}
+@keyframes ul{50%{transform:scaleX(1.7)}}
+.online.live .dot{position:relative}
+.online.live .dot:after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--ok);animation:ping 2s ease-out infinite}
+@keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(2.6);opacity:0}}
+.check.on s{animation:pop2 .3s cubic-bezier(.2,.8,.2,1)}
+.rules span.ok{animation:pop2 .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop2{50%{transform:scale(1.2)}}
+.mini{transition:color .2s}
+.mini.ok,.mini.bad{animation:rise .3s cubic-bezier(.2,.8,.2,1)}
