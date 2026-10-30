@@ -8,7 +8,7 @@
   "use strict";
   const q = s => document.querySelector(s), root = document.documentElement, L = window.lg;
   const intro = q("#intro");
-  const INTRO_MS = 5600;                       // total intro length (the progress line in flow.css is 5.4 s)
+  const INTRO_MS = 4800;                       // total intro length (the progress line in flow.css is 4.6 s)
 
   /* ----- 1) wait (invisibly) until everything is really loaded ----- */
   const need = { fonts: false, visual: false, audio: false, server: false };
@@ -54,23 +54,59 @@
   /* ----- 2) intro ----- */
   let introOn = false, introT0 = 0, introTimer = 0, ended = false;
 
+  /* synthesized intro sound (no file): low swell -> whoosh -> impact when the letters land -> shimmer.
+     Everything goes through one compressor so it can never clip, and stays quiet under the music. */
   function sfx() {
     if (!CONFIG.sounds) return;
     try {
       actx = actx || new (window.AudioContext || window.webkitAudioContext)();
       if (actx.state === "suspended") actx.resume();
-      const t = actx.currentTime;
-      const tone = (type, f0, f1, at, dur, vol) => {
+      const t = actx.currentTime, out = actx.createDynamicsCompressor(), master = actx.createGain();
+      master.gain.value = 0.9; out.connect(master); master.connect(actx.destination);
+
+      const env = (g, at, atk, dur, vol) => {
+        g.gain.setValueAtTime(0.0001, t + at);
+        g.gain.exponentialRampToValueAtTime(vol, t + at + atk);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + at + dur);
+      };
+      const tone = (type, f0, f1, at, dur, vol, atk) => {
         const o = actx.createOscillator(), g = actx.createGain();
         o.type = type; o.frequency.setValueAtTime(f0, t + at); o.frequency.exponentialRampToValueAtTime(f1, t + at + dur);
-        g.gain.setValueAtTime(0.0001, t + at); g.gain.exponentialRampToValueAtTime(vol, t + at + dur * 0.15);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + at + dur);
-        o.connect(g); g.connect(actx.destination); o.start(t + at); o.stop(t + at + dur + 0.05);
+        env(g, at, atk || dur * 0.15, dur, vol);
+        o.connect(g); g.connect(out); o.start(t + at); o.stop(t + at + dur + 0.05);
       };
-      tone("sawtooth", 70, 800, 0.1, 1.2, 0.025);     // rising sweep
-      tone("sine", 130, 36, 1.3, 1.0, 0.11);          // impact when the logo lands
-      tone("sine", 1760, 880, 1.4, 1.3, 0.018);       // shimmer
+      // filtered noise whoosh (the line sweeping across the screen)
+      const len = Math.floor(actx.sampleRate * 1.4), buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      const n = actx.createBufferSource(), bp = actx.createBiquadFilter(), ng = actx.createGain();
+      n.buffer = buf; bp.type = "bandpass"; bp.Q.value = 0.8;
+      bp.frequency.setValueAtTime(220, t + 0.1); bp.frequency.exponentialRampToValueAtTime(5200, t + 1.2);
+      env(ng, 0.1, 0.9, 1.3, 0.05);
+      n.connect(bp); bp.connect(ng); ng.connect(out); n.start(t + 0.1); n.stop(t + 1.5);
+
+      tone("sawtooth", 55, 420, 0.1, 1.8, 0.018, 1.4);       // rising swell under the whoosh
+      tone("sine", 150, 38, 1.95, 1.1, 0.12, 0.02);          // impact when the letters land (matches .in-pulse at 1.95 s)
+      tone("sine", 70, 30, 1.95, 1.4, 0.09, 0.03);           // sub tail
+      tone("sine", 1760, 1320, 2.3, 1.4, 0.016, 0.05);       // shimmer with the light sweep
+      tone("sine", 2640, 1980, 2.38, 1.2, 0.009, 0.05);
     } catch (e) {}
+  }
+
+  /* measure the REAL frame rate while the intro plays; a weak PC gets the light mode (no extra effects) */
+  function watchFps() {
+    if (CONFIG.lite || typeof requestAnimationFrame !== "function") return;
+    let start = 0, from = 0, n = 0;
+    const loop = t => {
+      if (!introOn) return;
+      if (!start) start = t;
+      if (t - start < 400) return requestAnimationFrame(loop);              // grace period: the first frames are always slower
+      if (!from) from = t;
+      n++;
+      const dt = t - from;
+      if (dt < 1500) return requestAnimationFrame(loop);
+      if (n / (dt / 1000) < 20) root.classList.add("lite");                 // under 20 fps for 1.5 s -> light mode
+    };
+    requestAnimationFrame(loop);
   }
 
   function startIntro() {
@@ -80,7 +116,7 @@
       intro.classList.add("run");               // all intro animations start together (they were pre-rendered, paused)
       introOn = true; introT0 = performance.now();
       send("stage", { name: "intro" });         // Lua: hide chat, start the music
-      sfx();
+      sfx(); watchFps();
       introTimer = setTimeout(() => endIntro(false), INTRO_MS);
     }));
   }
@@ -118,7 +154,7 @@
     setTimeout(() => root.classList.remove("ui-in", "reveal"), 2200);
   }
 
-  const skip = () => { if (introOn && performance.now() - introT0 > 800) endIntro(); };
+  const skip = () => { if (introOn && performance.now() - introT0 > 600) endIntro(); };
   window.addEventListener("keydown", skip, true);
   intro.addEventListener("pointerdown", skip);
 
