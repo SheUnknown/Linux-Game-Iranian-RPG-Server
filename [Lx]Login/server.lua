@@ -854,6 +854,7 @@ end
 -- events
 --------------------------------------------------------------------------
 local POST = { welcomeDone = true, saveProfile = true, profileContinue = true, checkRef = true }   -- allowed after login / right after registration
+local TYPING = { checkUsername = true, checkRef = true }                                           -- lightweight lookups while the player types
 
 addEventHandler("lg:server:auth", resourceRoot, function(action, data)
   local player = client
@@ -866,10 +867,16 @@ addEventHandler("lg:server:auth", resourceRoot, function(action, data)
   elseif POST[action] then
     if action == "welcomeDone" or not profilePending[player] then return end
   end
-  local t = getTickCount()
-  if lastAct[player] and t - lastAct[player] < 250 then return ui(player, "unlock") end
-  lastAct[player] = t
-  if busy[player] then return end
+  -- one throttle PER action: typing helpers (username / referral check) must never swallow a real Login / Register click
+  local t, light = getTickCount(), TYPING[action]
+  local la = lastAct[player] or {}
+  lastAct[player] = la
+  if la[action] and t - la[action] < (light and 150 or 250) then
+    if not light then ui(player, "unlock") end
+    return
+  end
+  la[action] = t
+  if busy[player] and not light then return end
   local ok, err = pcall(fn, player, data)
   if not ok then
     busy[player] = nil
@@ -993,6 +1000,14 @@ addEventHandler("onResourceStart", resourceRoot, function()
       if not authed[p] then ui(p, "setPlayers", n) end
     end
   end, 10000, 0)
+  setTimer(function()                                      -- forget old lock / cooldown entries (these tables are keyed by serial and would only ever grow)
+    local tk, t = getTickCount(), now()
+    for k, f in pairs(fails) do if f.lockUntil < tk - 600000 then fails[k] = nil end end
+    for k, v in pairs(mailCd) do if t - v > 3600 then mailCd[k] = nil end end
+    for k, v in pairs(resetCd) do if t - v > 3600 then resetCd[k] = nil end end
+    for id, e in pairs(codes) do if e.expires <= t then codes[id] = nil end end
+    for id, e in pairs(rcodes) do if e.expires <= t then rcodes[id] = nil end end
+  end, 300000, 0)
   setTimer(function()                                      -- kick players who idle on the login screen
     local tk = getTickCount()
     for p, since in pairs(joinedAt) do
