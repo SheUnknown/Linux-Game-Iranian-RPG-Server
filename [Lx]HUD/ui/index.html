@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>LX HUD</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== HUD ===================== -->
+<div id="stage" class="pos-tr">
+  <div id="hud" class="s-full b-smooth">
+
+    <div class="cw" id="w-head" style="--i:0"><div class="in">
+      <div class="row r-head">
+        <div class="brand" id="e-brand">
+          <div class="logo" id="e-logo"><img src="logo.png" alt=""><b>LX</b></div>
+          <div class="bt">
+            <strong id="e-server">LINUX GAME</strong>
+            <span id="e-date">--</span>
+          </div>
+        </div>
+        <div class="clock" id="e-clock"><span id="c-h">00</span><i>:</i><span id="c-m">00</span><small id="c-s">00</small><em id="c-ap"></em></div>
+      </div>
+    </div></div>
+
+    <div class="cw" id="w-name" style="--i:1"><div class="in">
+      <div class="row r-name">
+        <span class="dot"></span>
+        <b id="e-name">Player</b>
+        <span class="idp" id="e-id"><u>ID</u><b id="e-idv">–</b></span>
+      </div>
+    </div></div>
+
+    <div class="cw" id="w-money" style="--i:2"><div class="in">
+      <div class="row r-money">
+        <div class="money" id="e-money"><i>$</i><b id="m-val">0</b><div class="deltas" id="m-d"></div></div>
+        <div class="stars" id="e-wanted"></div>
+      </div>
+    </div></div>
+
+    <div class="cw" id="w-hp" style="--i:3"><div class="in">
+      <div class="row r-bar r-hp" id="r-hp">
+        <svg class="bi" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9-9.2C1.8 7.2 4 4 7.2 4c2 0 3.4 1 4.8 3 1.4-2 2.8-3 4.8-3C20 4 22.2 7.2 21 10.8 19 15.6 12 20 12 20z"/></svg>
+        <div class="bar"><i class="ghost"></i><i class="fill"></i></div>
+        <b class="val">100</b>
+      </div>
+    </div></div>
+
+    <div class="cw" id="w-ar" style="--i:4"><div class="in">
+      <div class="row r-bar r-ar" id="r-ar">
+        <svg class="bi" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/></svg>
+        <div class="bar"><i class="ghost"></i><i class="fill"></i></div>
+        <b class="val">0</b>
+      </div>
+    </div></div>
+
+    <div class="cw" id="w-weapon" style="--i:5"><div class="in">
+      <div class="row r-weapon">
+        <div class="wi" id="w-ico"></div>
+        <div class="wt" id="w-name-t">FIST</div>
+        <div class="am" id="e-ammo"><b id="a-clip">0</b><small id="a-res"></small></div>
+      </div>
+    </div></div>
+
+  </div>
+</div>
+
+<!-- ===================== F6 PANEL ===================== -->
+<div id="pwrap">
+  <aside id="panel">
+    <header>
+      <div class="ph-t"><small id="p-srv">LINUX GAME</small><h2>HUD Customizer</h2></div>
+      <kbd id="p-key">F6</kbd>
+      <button id="p-close" class="x" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </header>
+    <nav id="p-tabs">
+      <button data-t="elements" class="on"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg><span>Elements</span></button>
+      <button data-t="style"><svg viewBox="0 0 24 24"><path d="M12 3s6 6.2 6 10.5A6 6 0 0 1 6 13.5C6 9.200 12 3 12 3z"/></svg><span>Style</span></button>
+      <button data-t="layout"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M12 3l-3 3m3-3l3 3M12 21l-3-3m3 3l3-3M3 12l3-3m-3 3l3 3M21 12l-3-3m3 3l-3 3"/></svg><span>Layout</span></button>
+      <button data-t="clock"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Clock</span></button>
+      <i class="ind"></i>
+    </nav>
+    <div id="p-body">
+      <section class="pg on" data-p="elements"></section>
+      <section class="pg" data-p="style"></section>
+      <section class="pg" data-p="layout"></section>
+      <section class="pg" data-p="clock"></section>
+    </div>
+    <footer>
+      <span class="saved" id="p-saved"><svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg>Saved automatically</span>
+      <button id="p-reset" class="ghost">Reset</button>
+    </footer>
+  </aside>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
