@@ -130,7 +130,7 @@ local function shouldShow()
     local cam = getCameraTarget()
     if cam ~= localPlayer and cam ~= getPedOccupiedVehicle(localPlayer) then return false end
   end
-  if Config.hideOnMap and isPlayerMapVisible() then return false end
+  if Config.hideOnMap and (isPlayerMapVisible() or getElementData(localPlayer, "Lx.radar.map")) then return false end   -- the 2nd flag is set by [Lx]Radar
   return true
 end
 
