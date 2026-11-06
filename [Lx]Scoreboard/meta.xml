@@ -1,0 +1,9 @@
+<meta>
+  <info author="Linux Game" name="[Lx]Scoreboard" version="1.0.0" type="script" description="Hold TAB: online players list"/>
+  <min_mta_version server="1.6.0" client="1.6.0"/>
+  <include resource="[Lx]Global"/>
+  <script src="client.lua" type="client"/>
+  <file src="ui/index.html"/><file src="ui/style.css"/><file src="ui/script.js"/>
+  <file src="ui/ui.css"/><file src="ui/ui.js"/>
+  <file src="ui/fonts/title.woff2"/><file src="ui/fonts/body.woff2"/>
+</meta>

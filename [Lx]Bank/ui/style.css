@@ -1,0 +1,30 @@
+#dim{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity .3s ease;pointer-events:none;will-change:opacity}
+#win{position:fixed;left:50%;top:50%;width:520px;margin:-270px 0 0 -260px;padding:22px 24px 24px;opacity:0;transform:translateY(18px) scale(.97);pointer-events:none;
+  transition:transform .38s var(--ease),opacity .28s ease;will-change:transform,opacity}
+body.on #dim{opacity:1}body.on #win{opacity:1;transform:none;pointer-events:auto}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.x{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:transform .2s var(--ease)}
+.x:hover{transform:scale(1.08)}.x svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.bal{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.card{border-radius:12px;padding:14px 16px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.card b{font:800 22px var(--font-title);letter-spacing:1px}
+.cash b{color:var(--ok)}.bank b{color:#f5c451}
+.mut{color:var(--mut)}
+#tabs{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);margin-bottom:16px}
+#tabs button{height:38px;border:0;background:none;color:var(--mut);font:700 11px var(--font-title);letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:color .2s}
+#tabs button.on{color:var(--ink)}
+#ink{position:absolute;left:0;bottom:-1px;width:25%;height:2px;background:var(--ac);transition:transform .35s var(--ease);will-change:transform}
+#form{display:flex;flex-direction:column;gap:8px;min-height:250px}
+.amt{position:relative}.amt span{position:absolute;left:14px;top:10px;color:var(--mut)}.amt input{padding-left:30px;font:800 16px var(--font-title);letter-spacing:1px}
+.chips{display:flex;gap:6px}.chips button{flex:1;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:700 11px var(--font-title);cursor:pointer;transition:transform .15s var(--ease),border-color .15s}
+.chips button:hover{border-color:var(--ac);transform:translateY(-1px)}
+#note{font-size:11px;min-height:16px}
+#go{margin-top:4px;height:46px}
+#msg{min-height:20px;font-size:12px;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s var(--ease)}
+#msg.show{opacity:1;transform:none}#msg.ok{color:var(--ok)}#msg.bad{color:var(--bad)}
+#hist{min-height:250px}#hlist{max-height:300px;display:flex;flex-direction:column;gap:6px;padding-right:4px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--line);animation:u-rise .35s var(--ease) both;animation-delay:calc(var(--i,0)*25ms)}
+.row .l{display:flex;flex-direction:column;gap:2px;min-width:0}.row .k{font:700 11px var(--font-title);letter-spacing:1.5px;text-transform:uppercase}
+.row .i{font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .a{font:800 13px var(--font-title);white-space:nowrap}.pos{color:var(--ok)}.neg{color:var(--bad)}
+.empty{text-align:center;color:var(--mut);padding:40px 0}

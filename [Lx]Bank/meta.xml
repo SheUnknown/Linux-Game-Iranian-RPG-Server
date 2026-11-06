@@ -1,0 +1,22 @@
+<meta>
+  <info author="Linux Game" name="[Lx]Bank" version="1.0.0" type="script" description="Wallet (cash + bank), ATMs, transfers, history. Single source of truth for player money"/>
+  <min_mta_version server="1.6.0" client="1.6.0"/>
+  <include resource="[Lx]Global"/>
+  <include resource="[Lx]Notification"/>
+
+  <script src="config.lua" type="shared"/>
+  <script src="server.lua" type="server"/>
+  <script src="client.lua" type="client"/>
+
+  <file src="ui/index.html"/><file src="ui/style.css"/><file src="ui/script.js"/>
+  <file src="ui/ui.css"/><file src="ui/ui.js"/>
+  <file src="ui/fonts/title.woff2"/><file src="ui/fonts/body.woff2"/>
+
+  <!-- other resources (all amounts are positive integers; every call returns true | false, reason) -->
+  <export function="getCash" type="server"/>
+  <export function="getBank" type="server"/>
+  <export function="addCash"  type="server"/>   <!-- (player, amount, reason) -->
+  <export function="takeCash" type="server"/>   <!-- (player, amount, reason) : false if not enough -->
+  <export function="addBank"  type="server"/>
+  <export function="takeBank" type="server"/>
+</meta>

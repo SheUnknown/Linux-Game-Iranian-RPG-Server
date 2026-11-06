@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="style.css"></head>
+<body>
+<div id="dim"></div>
+<div id="win" class="u-panel">
+  <header>
+    <div><div class="u-sub">Linux Game</div><div class="u-title">Bank</div></div>
+    <button class="x" id="closeBtn" aria-label="close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+  <section class="bal">
+    <div class="card cash"><span class="u-sub">Cash</span><b id="cash">$0</b></div>
+    <div class="card bank"><span class="u-sub">Bank</span><b id="bank">$0</b></div>
+  </section>
+  <nav id="tabs">
+    <button data-t="deposit" class="on">Deposit</button><button data-t="withdraw">Withdraw</button>
+    <button data-t="transfer">Transfer</button><button data-t="history">History</button>
+    <i id="ink"></i>
+  </nav>
+  <section id="form">
+    <div id="targetRow" class="u-hide"><label class="u-sub">Receiver (online player name)</label><input id="target" class="u-input" maxlength="32" autocomplete="off" spellcheck="false"></div>
+    <label class="u-sub">Amount</label>
+    <div class="amt"><span>$</span><input id="amount" class="u-input" inputmode="numeric" maxlength="14" autocomplete="off" placeholder="0"></div>
+    <div class="chips"><button data-v="1000">1K</button><button data-v="10000">10K</button><button data-v="100000">100K</button><button data-v="1000000">1M</button><button data-v="max">MAX</button></div>
+    <div id="note" class="mut"></div>
+    <button id="go" class="u-btn">Deposit</button>
+    <div id="msg"></div>
+  </section>
+  <section id="hist" class="u-hide"><div id="hlist" class="u-scroll"></div></section>
+</div>
+<script src="ui.js"></script><script src="script.js"></script>
+</body></html>

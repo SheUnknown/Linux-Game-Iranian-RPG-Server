@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="style.css"></head>
+<body>
+<div id="dim"></div>
+<div id="win" class="u-panel">
+  <header>
+    <div><div class="u-sub">Linux Game</div><div class="u-title">Inventory</div></div>
+    <div class="wt"><div class="wt-top"><span id="wUsed">0.0</span><span class="mut"> / <span id="wMax">40</span> kg</span></div><div class="bar"><i id="wBar"></i></div></div>
+    <button class="x" id="closeBtn" aria-label="close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+  <div class="body">
+    <div id="grid"></div>
+    <aside id="side">
+      <div id="empty" class="mut">Select an item.<br>Drag to move or stack.</div>
+      <div id="info" class="u-hide">
+        <div class="ic big" id="iIc"></div>
+        <div class="u-title" id="iName"></div>
+        <div class="mut" id="iDesc"></div>
+        <div class="meta"><span id="iCnt"></span><span id="iWt"></span></div>
+        <div class="qty"><button id="qMinus" class="u-btn ghost sm">−</button><b id="qVal">1</b><button id="qPlus" class="u-btn ghost sm">+</button><button id="qAll" class="u-btn ghost sm">ALL</button></div>
+        <div class="acts">
+          <button class="u-btn" id="bUse">Use</button>
+          <button class="u-btn ghost" id="bGive">Give</button>
+          <button class="u-btn ghost" id="bDrop">Discard</button>
+        </div>
+        <div id="people" class="u-hide"></div>
+        <div id="confirm" class="u-hide"><span>Discard <b id="cQty"></b> permanently?</span><button class="u-btn sm" id="cYes">Yes</button><button class="u-btn ghost sm" id="cNo">No</button></div>
+      </div>
+    </aside>
+  </div>
+</div>
+<div id="ghost" class="slot u-hide"></div>
+<script src="ui.js"></script><script src="items.js"></script><script src="script.js"></script>
+</body></html>

@@ -1,0 +1,11 @@
+<meta>
+  <info author="Linux Game" name="[Lx]Ui" version="1.0.0" type="script" description="Shared design system (tokens, components, helpers) for every [Lx] page"/>
+  <min_mta_version server="1.6.0" client="1.6.0"/>
+  <script src="client.lua" type="client"/>
+
+  <file src="ui.css"/>
+  <file src="ui.js"/>
+  <file src="fonts/title.woff2"/>
+  <file src="fonts/body.woff2"/>
+  <export function="getAccent" type="client"/>
+</meta>

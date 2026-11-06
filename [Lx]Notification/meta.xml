@@ -1,0 +1,17 @@
+<meta>
+  <info author="Linux Game" name="[Lx]Notification" version="1.0.0" type="script" description="Unified toast notifications"/>
+  <min_mta_version server="1.6.0" client="1.6.0"/>
+
+  <script src="server.lua" type="server"/>
+  <script src="client.lua" type="client"/>
+
+  <file src="ui/index.html"/>
+  <file src="ui/style.css"/>
+  <file src="ui/script.js"/>
+  <file src="ui/fonts/title.woff2"/>
+  <file src="ui/fonts/body.woff2"/>
+
+  <!-- notify(player | root, kind, title, text, durationMs)   kind: success | error | warning | info | money -->
+  <export function="notify" type="server"/>
+  <export function="notify" type="client"/>
+</meta>

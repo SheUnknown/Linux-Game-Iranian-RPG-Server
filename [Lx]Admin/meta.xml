@@ -1,0 +1,20 @@
+<meta>
+  <info author="Linux Game" name="[Lx]Admin" version="1.0.0" type="script" description="Staff panel (F9): kick, ban, mute, freeze, goto, bring, heal, announce, staff chat"/>
+  <min_mta_version server="1.6.0" client="1.6.0"/>
+  <include resource="[Lx]Global"/>
+  <include resource="[Lx]Notification"/>
+
+  <aclrequest>
+    <right name="function.kickPlayer" access="true"/>
+  </aclrequest>
+
+  <script src="server.lua" type="server"/>
+  <script src="client.lua" type="client"/>
+  <file src="ui/index.html"/><file src="ui/style.css"/><file src="ui/script.js"/>
+  <file src="ui/ui.css"/><file src="ui/ui.js"/>
+  <file src="ui/fonts/title.woff2"/><file src="ui/fonts/body.woff2"/>
+
+  <export function="getRank"     type="server"/>   <!-- (player) -> 0..4 -->
+  <export function="isStaff"     type="server"/>   <!-- (player, minRank=1) -> bool -->
+  <export function="notifyStaff" type="server"/>   <!-- (text, minRank=1) -->
+</meta>

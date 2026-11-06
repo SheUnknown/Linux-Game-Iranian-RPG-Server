@@ -1,0 +1,15 @@
+<meta>
+  <info author="Linux Game" name="[Lx]Anti-Cheat" version="1.0.0" type="script" description="Server-side checks: teleport/speed, money mismatch, banned weapons, health, event flood"/>
+  <min_mta_version server="1.6.0" client="1.6.0"/>
+  <include resource="[Lx]Global"/>
+
+  <aclrequest>
+    <right name="function.kickPlayer"   access="true"/>
+    <right name="function.addDebugHook" access="true"/>
+  </aclrequest>
+
+  <script src="server.lua" type="server"/>
+
+  <export function="ignore"     type="server"/>   <!-- (player, ms)  skip the teleport/speed check after a server-side teleport -->
+  <export function="getStrikes" type="server"/>   <!-- (player) -> number -->
+</meta>

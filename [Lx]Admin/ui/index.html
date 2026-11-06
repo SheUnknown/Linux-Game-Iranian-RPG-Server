@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="style.css"></head>
+<body>
+<div id="dim"></div>
+<div id="win" class="u-panel">
+  <header>
+    <div><div class="u-sub" id="rankLbl">Staff</div><div class="u-title">Admin Panel</div></div>
+    <nav id="tabs"><button data-t="players" class="on">Players</button><button data-t="bans">Bans</button><button data-t="announce">Announce</button><i id="ink"></i></nav>
+    <button class="x" id="closeBtn" aria-label="close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+
+  <section id="pPlayers">
+    <div class="left"><input id="q" class="u-input" placeholder="Search name or ID…" autocomplete="off" spellcheck="false"><div id="plist" class="u-scroll"></div></div>
+    <div class="right">
+      <div id="none" class="mut">Select a player.</div>
+      <div id="sel" class="u-hide">
+        <div class="who"><b id="sName"></b><span id="sMeta" class="mut"></span></div>
+        <input id="reason" class="u-input" maxlength="80" placeholder="Reason (kick / ban / mute)" autocomplete="off">
+        <div class="mins"><label class="u-sub">Minutes (ban 0 = permanent · mute 1-1440)</label><input id="mins" class="u-input" inputmode="numeric" maxlength="7" value="60" autocomplete="off"></div>
+        <div class="grid">
+          <button data-a="goto" class="u-btn ghost">Goto</button><button data-a="bring" class="u-btn ghost">Bring</button>
+          <button data-a="heal" class="u-btn ghost">Heal</button><button data-a="freeze" class="u-btn ghost">Freeze</button>
+          <button data-a="mute" class="u-btn ghost">Mute</button><button data-a="unmute" class="u-btn ghost">Unmute</button>
+          <button data-a="kick" class="u-btn">Kick</button><button data-a="ban" class="u-btn red">Ban</button>
+        </div>
+        <div id="confirm" class="u-hide"><span id="cText"></span><button id="cYes" class="u-btn sm">Confirm</button><button id="cNo" class="u-btn ghost sm">Cancel</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pBans" class="u-hide"><div id="blist" class="u-scroll"></div></section>
+  <section id="pAnn" class="u-hide"><label class="u-sub">Message to the whole server</label><input id="ann" class="u-input" maxlength="120" autocomplete="off"><button id="annGo" class="u-btn">Send announcement</button></section>
+</div>
+<script src="ui.js"></script><script src="script.js"></script>
+</body></html>

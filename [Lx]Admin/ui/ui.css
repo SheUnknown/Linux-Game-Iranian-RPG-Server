@@ -1,0 +1,45 @@
+/* [Lx]Ui design system v1. Rules for every page:
+   1) animate ONLY transform and opacity   2) no backdrop-filter / blur / animated box-shadow / animated filter
+   3) one browser per resource, paused while hidden   4) will-change only on things that really animate */
+@font-face{font-family:"LXTitle";src:url("fonts/title.woff2") format("woff2");font-weight:400 900;font-display:block}
+@font-face{font-family:"LXBody";src:url("fonts/body.woff2") format("woff2");font-display:block}
+:root{
+  --ac:#e4001e;--ac-hi:#ff2442;--ink:#f3f3f6;--mut:#8d8e96;--dim:#5d5e66;
+  --bg:#08090c;--panel:#0d0e12;--card:rgba(255,255,255,.045);--line:rgba(255,255,255,.09);
+  --ok:#18e0a0;--bad:#ff4a5e;--warn:#ffc233;--info:#6aa8ff;
+  --r:14px;--r-sm:10px;--ease:cubic-bezier(.22,1,.36,1);--t:.28s;
+  --font-title:"LXTitle","Orbitron","Segoe UI",sans-serif;--font-body:"LXBody","Share Tech Mono",Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:transparent;color:var(--ink);font:13px/1.5 var(--font-body);user-select:none}
+img{-webkit-user-drag:none}
+
+.u-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
+.u-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px}
+.u-title{font:800 13px var(--font-title);letter-spacing:2px;text-transform:uppercase}
+.u-sub{font-size:10px;letter-spacing:3px;color:var(--dim);text-transform:uppercase}
+
+.u-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 20px;border:0;border-radius:var(--r-sm);cursor:pointer;
+  font:800 12px var(--font-title);letter-spacing:2px;text-transform:uppercase;color:#fff;background:linear-gradient(180deg,var(--ac-hi),var(--ac));
+  transition:transform var(--t) var(--ease),opacity var(--t);will-change:transform}
+.u-btn:hover{transform:translateY(-1px)}
+.u-btn:active{transform:translateY(1px) scale(.98)}
+.u-btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--ink)}
+.u-btn[disabled]{opacity:.45;pointer-events:none}
+
+.u-input{width:100%;height:42px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;outline:none;
+  transition:border-color var(--t)}
+.u-input:focus{border-color:var(--ac)}
+
+.u-toggle{position:relative;width:42px;height:24px;border-radius:99px;background:#2a2b32;cursor:pointer;transition:background var(--t)}
+.u-toggle:after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform var(--t) var(--ease)}
+.u-toggle.on{background:var(--ac)}.u-toggle.on:after{transform:translateX(18px)}
+
+.u-scroll{overflow-y:auto;overscroll-behavior:contain}
+.u-scroll::-webkit-scrollbar{width:4px}.u-scroll::-webkit-scrollbar-thumb{background:#ffffff22;border-radius:9px}
+
+/* entrance helpers (add .u-in to the element; use style="--i:N" to stagger lists) */
+.u-in{animation:u-rise .5s var(--ease) both;animation-delay:calc(var(--i,0)*45ms)}
+@keyframes u-rise{from{opacity:0;transform:translateY(14px)}}
+@keyframes u-fade{from{opacity:0}}
+.u-hide{display:none!important}

@@ -1,0 +1,19 @@
+<meta>
+  <info author="Linux Game" name="[Lx]Global" version="1.1.0" type="script" description="Shared core: login state, rate limit, logging, text/number helpers"/>
+  <min_mta_version server="1.6.0" client="1.6.0"/>
+
+  <script src="shared.lua" type="shared"/>
+  <script src="server.lua" type="server"/>
+
+  <!-- usable on both sides -->
+  <export function="isLoggedIn"   type="shared"/>
+  <export function="getUserId"    type="shared"/>
+  <export function="formatNumber" type="shared"/>
+  <export function="cleanText"    type="shared"/>
+  <export function="toInt"        type="shared"/>
+  <!-- server only -->
+  <export function="getPlayerByUserId" type="server"/>
+  <export function="rateLimit"         type="server"/>
+  <export function="log"               type="server"/>
+  <export function="getDb"             type="server"/>
+</meta>
